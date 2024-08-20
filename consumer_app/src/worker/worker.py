@@ -46,7 +46,10 @@ async def process_message(msg: AbstractIncomingMessage) -> None:
                 logger.info(f"Data saved: {row}")
                 await client.url_validation(code=row.get("code"))
                 await msg.ack()
-            await msg.reject(requeue=True)
+            else:
+                await msg.reject(requeue=True)
+        return
+
 
 async def initialize_dlx_exchange(channel: AbstractRobustChannel) -> None:
     """
