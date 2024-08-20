@@ -31,21 +31,22 @@ async def process_message(msg: AbstractIncomingMessage) -> None:
         except JSONDecodeError as err:
             logger.error(f"Error occurred: {err=}")
             await msg.reject(requeue=False)
+            return
         except ValidationError as err:
             logger.error(f"Error occurred: {err=}")
             await msg.reject(requeue=False)
+            return
         else:
             if not (link := body.get("link")):
                 logger.error("Error occurred: 'link' not exists in received data")
                 await msg.reject(requeue=False)
+                return
             if row := await service.insert_message(url=link, data=data):
                 client = Client()
                 logger.info(f"Data saved: {row}")
                 await client.url_validation(code=row.get("code"))
                 await msg.ack()
-            else:
-                await msg.reject(requeue=True)
-
+            await msg.reject(requeue=True)
 
 async def initialize_dlx_exchange(channel: AbstractRobustChannel) -> None:
     """
