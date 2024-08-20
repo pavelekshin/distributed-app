@@ -101,7 +101,7 @@
 
 ### Migrations
 
-- Create an automatic migration from changes in `src/database.py`
+- Create an automatic migration from changes in web_app `src/database.py`
 
 ```shell
 docker-compose exec app_web makemigrations *migration_name*
