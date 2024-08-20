@@ -9,7 +9,7 @@ async def get_row_by_code(code: str) -> dict[str, Any] | None:
     """
     Check code in table
     :param code: code
-    :return: inserted row as dict or None
+    :return: dict or None
     """
     select_query = message.select().where(message.c.code == code)
     return await fetch_one(select_query)
@@ -23,7 +23,7 @@ async def insert_message(
     :param code: code
     :param data: Message
     :param status: bool
-    :return: inserted row as dict or None
+    :return: dict or None
     """
     insert_query = (
         subscribe.insert()

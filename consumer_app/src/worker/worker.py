@@ -34,7 +34,7 @@ async def process_message(msg: AbstractIncomingMessage) -> None:
         except ValidationError as err:
             logger.error(f"Error occurred: {err=}")
             await msg.reject(requeue=False)
-        finally:
+        else:
             if not (link := body.get("link")):
                 logger.error("Error occurred: 'link' not exists in received data")
                 await msg.reject(requeue=False)
@@ -61,7 +61,7 @@ async def initialize_dlx_exchange(channel: AbstractRobustChannel) -> None:
 
 
 async def initialize_common_exchange(
-    channel: AbstractRobustChannel, queue_name: str
+        channel: AbstractRobustChannel, queue_name: str
 ) -> AbstractQueue:
     """
     Initialize common exchange and queue
