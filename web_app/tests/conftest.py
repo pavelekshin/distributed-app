@@ -2,7 +2,6 @@ import pytest
 from aiohttp.test_utils import TestClient
 from src.app import init_app
 
-
 # @pytest.fixture(autouse=True, scope="session")
 # def run_migrations() -> None:
 #     import os
