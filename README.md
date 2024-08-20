@@ -87,7 +87,7 @@
 - SQLAlchemy Core query
 - RabbitMQ configured with DLX queue
 - pydantic model
-- aio-pika 
+- aio-pika
 - pytest
 - linters / format with ruff
 - and some other extras, like global custom exceptions, index naming convention, shortcut scripts for alembic, etc...
@@ -128,6 +128,16 @@ docker-compose exec app_consumer generatedata
 
 ### Pytest
 
+- Run tests on app_web node
+
 ```shell
 docker-compose exec app_web pytest -v
+```
+
+### Scale
+
+- Scale up consumer nodes
+
+```shell
+docker-compose up --scale app_consumer=*2*
 ```
