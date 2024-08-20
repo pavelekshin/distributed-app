@@ -29,7 +29,7 @@ async def data_generator(ids: int, job_id: str) -> list[dict[str, str | int]]:
             "data": {
                 "acc_id": str(ids),
                 "unsubscribe": False,
-                "msg_id": str(ids),
+                "msg_id": job_id,
             },
         },
         {
@@ -39,7 +39,7 @@ async def data_generator(ids: int, job_id: str) -> list[dict[str, str | int]]:
             "data": {
                 "acc_id": str(ids),
                 "unsubscribe": False,
-                "msg_id": str(ids),
+                "msg_id": job_id,
             },
         },
     ]
