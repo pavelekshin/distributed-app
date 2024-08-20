@@ -65,7 +65,7 @@ async def initialize_dlx_exchange(channel: AbstractRobustChannel) -> None:
 
 
 async def initialize_common_exchange(
-        channel: AbstractRobustChannel, queue_name: str
+    channel: AbstractRobustChannel, queue_name: str
 ) -> AbstractQueue:
     """
     Initialize common exchange and queue

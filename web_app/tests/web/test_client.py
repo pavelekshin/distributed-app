@@ -34,13 +34,13 @@ async def test_validate_not_found(client: TestClient):
     ],
 )
 async def test_validate_redirect(
-        client: TestClient,
-        monkeypatch: pytest.MonkeyPatch,
-        redirect,
-        expected,
+    client: TestClient,
+    monkeypatch: pytest.MonkeyPatch,
+    redirect,
+    expected,
 ) -> None:
-    from src.routes import service
     from src.routes import client as client_module
+    from src.routes import service
 
     async def fake_request(*args, **kwargs):
         return {
