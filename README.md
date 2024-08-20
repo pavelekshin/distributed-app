@@ -38,7 +38,6 @@
     ├── Dockerfile
     ├── alembic                                                         - alembic data
     │   ├── README
-    │   ├── __pycache__
     │   ├── env.py
     │   ├── script.py.mako
     │   └── versions
