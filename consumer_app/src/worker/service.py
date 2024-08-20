@@ -5,14 +5,6 @@ from typing import Any
 from src.database import fetch_one, message
 from src.model import UserData
 
-"""
-    Column("message_id", Integer, nullable=False),
-    Column("code", String, nullable=False),
-    Column("data", LargeBinary, nullable=False),
-    Column("original_url", String, nullable=False),
-    Column("created_at", DateTime, server_default=func.now(), nullable=False),
-"""
-
 
 async def insert_message(url: str, data: UserData) -> dict[str, Any] | None:
     insert_query = (
