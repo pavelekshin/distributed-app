@@ -1,0 +1,65 @@
+services:
+  app_consumer:
+    image: app_consumer_image
+    env_file:
+      - .env
+    build:
+      context: ./consumer_app
+      additional_contexts:
+        - requirements=./requirements
+      dockerfile: Dockerfile
+    volumes:
+      - ./consumer_app:/src
+    restart: on-failure
+    depends_on:
+      - app_db
+      - app_rabbitmq
+  app_web:
+    container_name: app_web
+    image: app_web_image
+    env_file:
+      - .env
+    build:
+      context: ./web_app
+      additional_contexts:
+        - requirements=./requirements
+      dockerfile: Dockerfile
+    volumes:
+      - ./web_app:/src
+    restart: on-failure
+    ports:
+      - "16000:8000"
+    depends_on:
+      - app_db
+      - app_consumer
+  app_db:
+    container_name: app_db
+    hostname: app_db
+    image: postgres:16-alpine3.19
+    env_file:
+      - .env
+    volumes:
+      - app_db:/var/lib/postgresql/data
+      - app_db_backups:/backups
+    expose:
+      - 5432
+  app_rabbitmq:
+    image: rabbitmq:3.13.3-management-alpine
+    hostname: app_rabbitmq
+    container_name: app_rabbitmq
+    expose:
+      - 15672
+      - 5672
+    ports:
+      - "15672:15672"
+
+volumes:
+  app_db:
+    driver: "local"
+  app_db_backups:
+    driver: "local"
+
+networks:
+  default:
+    external: true
+    name: dev
