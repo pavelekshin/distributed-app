@@ -121,7 +121,7 @@ docker-compose exec app_web downgrade -1  # or -2 or base or hash of the migrati
 - Run producer to generate some data
 
 ```shell
-docker-compose exec app_consumer generatedata # Create user with Admin role
+docker-compose exec app_consumer generatedata 
 ```
 
 ### Pytest
