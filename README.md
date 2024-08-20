@@ -19,20 +19,20 @@
 │   │   └── start-dev.sh
 │   └── src                                                             - src app module / global settings for modules
 │       ├── __init__.py
-│       ├── config                                                      
+│       ├── config                                                      - config staff
 │       │   └── config.py
-│       ├── database.py
+│       ├── database.py                                                 - global db staff
 │       ├── main.py
-│       ├── model.py
+│       ├── model.py                                                    - global pydantic model
 │       ├── rabbit.py
-│       ├── settings.py
+│       ├── settings.py                                                 - global settings staff
 │       ├── producer                                                    - producer module
 │       │   ├── __init__.py
 │       │   └── producer.py
 │       └── worker                                                      - worker module
 │           ├── __init__.py
-│           ├── client.py
-│           ├── service.py
+│           ├── client.py                                               - web client
+│           ├── service.py                                              - services
 │           └── worker.py
 └── web_app                                                             - web app
     ├── Dockerfile
@@ -43,7 +43,7 @@
     │   └── versions
     ├── alembic.ini
     ├── pytest.ini
-    ├── scripts
+    ├── scripts                                                         - scripts
     │   ├── downgrade
     │   ├── makemigrations
     │   ├── migrate
@@ -58,13 +58,13 @@
     │   │   ├── __init__.py
     │   │   └── config.py
     │   ├── constants.py                                                - global constants
-    │   ├── database.py
+    │   ├── database.py                                                 - db staff
     │   ├── exception_handlers.py                                       - global exception_handlers
     │   ├── exceptions.py                                               - global exceptions
     │   ├── main.py
     │   ├── model.py                                                    - pydantic model
     │   ├── routes.py
-    │   └── settings.py
+    │   └── settings.py                                                 
     │   ├── service
     │   │   ├── __init__.py
     │   │   ├── client.py
