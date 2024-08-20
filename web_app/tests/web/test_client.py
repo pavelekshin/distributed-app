@@ -5,19 +5,19 @@ from aiohttp import ClientResponse
 from aiohttp.test_utils import TestClient
 
 
-async def test_healthcheck(client: TestClient):
+async def test_healthcheck(client: TestClient) -> None:
     resp: ClientResponse = await client.get("/healthcheck")
     assert resp.status == 200
     assert await resp.json() == {"status": "ok"}
 
 
-async def test_dummy_url(client: TestClient):
-    resp: ClientResponse = await client.get("/asd")
+async def test_nonexistent_endpoint(client: TestClient) -> None:
+    resp: ClientResponse = await client.get("/nonexistent_endpoint")
     assert resp.status == 404
 
 
-async def test_validate_not_found(client: TestClient):
-    resp: ClientResponse = await client.post("/123/validate")
+async def test_validate_not_found(client: TestClient) -> None:
+    resp: ClientResponse = await client.post("/000/validate")
     assert resp.status == 404
     assert await resp.json() == {
         "error_code": "Internal Server error",
@@ -27,7 +27,7 @@ async def test_validate_not_found(client: TestClient):
 
 
 @pytest.mark.parametrize(
-    "redirect, expected",
+    "is_allow_redirect, expected",
     [
         (False, 302),
         (True, 200),
@@ -36,7 +36,7 @@ async def test_validate_not_found(client: TestClient):
 async def test_validate_redirect(
     client: TestClient,
     monkeypatch: pytest.MonkeyPatch,
-    redirect,
+    is_allow_redirect,
     expected,
 ) -> None:
     from src.routes import client as client_module
@@ -59,5 +59,7 @@ async def test_validate_redirect(
     monkeypatch.setattr(client_module, "check_resource", fake_validation)
     monkeypatch.setattr(service, "insert_message", fake_validation)
 
-    resp: ClientResponse = await client.post("/123/validate", allow_redirects=redirect)
+    resp: ClientResponse = await client.post(
+        "/000/validate", allow_redirects=is_allow_redirect
+    )
     assert resp.status == expected
