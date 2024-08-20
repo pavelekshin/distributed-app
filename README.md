@@ -85,7 +85,9 @@
     - async SQLAlchemy engine
     - migrations set in easy to understand format (`YYYY-MM-DD_HHmm_rev_slug`)
 - SQLAlchemy Core query
+- RabbitMQ configured with DLX queue
 - pydantic model
+- aio-pika 
 - pytest
 - linters / format with ruff
 - and some other extras, like global custom exceptions, index naming convention, shortcut scripts for alembic, etc...
