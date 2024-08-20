@@ -6,6 +6,7 @@ async def test_healthcheck(client: TestClient):
     resp: ClientResponse = await client.get("/healthcheck")
     assert resp.status == 200
     assert await resp.json() == {"status": "ok"}
+    assert await resp.json() == {"status": "ok"}
 
 
 async def test_dummy_url(client: TestClient):
@@ -16,3 +17,8 @@ async def test_dummy_url(client: TestClient):
 async def test_validate_code(client: TestClient):
     resp: ClientResponse = await client.post("/123/validate")
     assert resp.status == 404
+    assert await resp.json() == {
+        "error_code": "Internal Server error",
+        "error_message": "Code not found",
+        "detail": "Code not found",
+    }
