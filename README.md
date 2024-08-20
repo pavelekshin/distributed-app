@@ -7,6 +7,7 @@
 ├── README.md
 ├── docker-compose.yml
 ├── ruff.toml
+├── .env.example                                                        - env
 ├── requirements                                                        - requirements
 │   ├── base.txt
 │   ├── consumer.txt
@@ -40,7 +41,7 @@
     │   ├── README
     │   ├── env.py
     │   ├── script.py.mako
-    │   └── versions
+    │   └── versions                                              - alembic migrations
     ├── alembic.ini
     ├── pytest.ini
     ├── scripts                                                         - scripts
