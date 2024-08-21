@@ -1,4 +1,5 @@
 # Distributed app with producer/consumer/aiohttp/rabbitmq/postgresql
+
 <br>
 <br>
 - well-structured easy to understand and scale-up project structure:
@@ -90,11 +91,15 @@
 - RabbitMQ configured with DLX queue
 - pydantic model
 - aio-pika
-- pytest, coverage, mypy 
+- pytest, coverage, mypy
 - linters / format with ruff
 - and some other extras, like global custom exceptions, index naming convention, shortcut scripts for alembic, etc...
 
 ## Local Development
+
+### Requirements:
+
+docker-compose v2 to support all syntax inside compose .yml
 
 ### First Build Only
 
@@ -107,25 +112,25 @@
 - Create an automatic migration from changes in web_app `src/database.py`
 
 ```shell
-docker-compose exec app_web makemigrations *migration_name*
+docker compose exec app_web makemigrations *migration_name*
 ```
 
 - Run migrations
 
 ```shell
-docker-compose exec app_web migrate
+docker compose exec app_web migrate
 ```
 
 - Downgrade migrations
 
 ```shell
-docker-compose exec app_web downgrade -1  # or -2 or base or hash of the migration
+docker compose exec app_web downgrade -1  # or -2 or base or hash of the migration
 ```
 
 - Run producer to generate some data
 
 ```shell
-docker-compose exec app_consumer generatedata 
+docker compose exec app_consumer generatedata 
 ```
 
 ### Pytest
@@ -133,19 +138,19 @@ docker-compose exec app_consumer generatedata
 - Run tests on app_web node
 
 ```shell
-docker-compose exec app_web pytest -v
+docker compose exec app_web pytest -v
 ```
 
 - Run tests with coverage on app_web node
 
 ```shell
-docker-compose exec app_web coverage run -m pytest -v
+docker compose exec app_web coverage run -m pytest -v
 ```
 
 - Run coverage report on app_web node
 
 ```shell
-docker-compose exec app_web coverage report -m
+docker compose exec app_web coverage report -m
 ```
 
 ### Scale
@@ -153,5 +158,5 @@ docker-compose exec app_web coverage report -m
 - Scale up consumer nodes
 
 ```shell
-docker-compose up --scale app_consumer=*2*
+docker compose up --scale app_consumer=*2*
 ```
