@@ -21,7 +21,7 @@ class Message(BaseModel):
 
     @field_validator("data", mode="before")
     @classmethod
-    def parse_data(cls, value: str | dict) -> dict[str, Any]:
+    def parse_data(cls, value: str | dict[str, Any]) -> dict[str, Any]:
         if isinstance(value, str):
             return json.loads(value)
         return value

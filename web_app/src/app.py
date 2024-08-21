@@ -2,7 +2,8 @@ from asyncio.log import logger
 from typing import Any
 
 from aiohttp import web
-from aiohttp.typedefs import Handler
+from aiohttp.typedefs import Handler, Middleware
+from aiohttp.web_response import StreamResponse
 
 from src.exception_handlers import (
     base_exception_handler,
@@ -26,7 +27,7 @@ async def init_app() -> web.Application:
     return app
 
 
-def create_error_middleware(overrides: dict[str | int, Any]):  # type: ignore[no-untyped-def]
+def create_error_middleware(overrides: dict[str | int, Any]) -> Middleware:
     """
     Custom middleware error handler
     :param overrides: dict with exception handlers
@@ -34,7 +35,9 @@ def create_error_middleware(overrides: dict[str | int, Any]):  # type: ignore[no
     """
 
     @web.middleware
-    async def error_middleware(request: web.Request, handler: Handler):  # type: ignore[no-untyped-def]
+    async def error_middleware(
+        request: web.Request, handler: Handler
+    ) -> StreamResponse:
         try:
             return await handler(request)
         except web.HTTPException as ex:

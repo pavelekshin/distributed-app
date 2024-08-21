@@ -1,3 +1,5 @@
+from typing import Any
+
 from src.constants import ErrorCode, ErrorMessage
 
 
@@ -6,7 +8,7 @@ class DetailedError(Exception):
     error_code = ErrorCode.INTERNAL_SERVER_ERROR
     error_detail = None
 
-    def __init__(self, detail: str | dict | None = None) -> None:
+    def __init__(self, detail: str | dict[str, Any] | None = None) -> None:
         self.error_detail = detail
 
 
