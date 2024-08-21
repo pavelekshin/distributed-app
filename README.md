@@ -91,7 +91,8 @@
 - RabbitMQ configured with DLX queue
 - pydantic model
 - aio-pika
-- pytest, coverage, mypy
+- mypy
+- pytest, coverage
 - linters / format with ruff
 - and some other extras, like global custom exceptions, index naming convention, shortcut scripts for alembic, etc...
 
