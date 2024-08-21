@@ -42,7 +42,7 @@
     │   ├── README
     │   ├── env.py
     │   ├── script.py.mako
-    │   └── versions                                              - alembic migrations
+    │   └── versions                                                    - alembic migrations
     ├── alembic.ini
     ├── pytest.ini
     ├── scripts                                                         - scripts
@@ -74,8 +74,8 @@
     └── tests                                                           - tests
         ├── __init__.py
         ├── conftest.py
-        └── test_client.py
-
+        └── web
+           └── test_client.py
 ```
 
 - async IO operations
