@@ -6,7 +6,7 @@ class SqlAlchemyConfig:
 
     __test__ = False
 
-    DATABASE_URL: str = None
+    DATABASE_URL: str = None  # type: ignore
     ECHO: bool = False
     ENGINE_OPTIONS: dict[str, Any] = {}
 
@@ -42,7 +42,7 @@ class PostgreSQL(SqlAlchemyConfig):
         "pool_pre_ping": True,
     }
 
-    def __init__(self, url, echo=None):
+    def __init__(self, url: str, echo: bool | None = None):
         self.DATABASE_URL = url
         if echo:
             self.ECHO = echo

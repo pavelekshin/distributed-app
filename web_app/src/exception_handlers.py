@@ -7,7 +7,7 @@ from src.exceptions import (
 
 
 async def not_found_error_exception_handler(
-    request, exception: NotFoundError
+    request: web.Request, exception: NotFoundError
 ) -> web.Response:
     """
     Return response for NotFoundError exception.
@@ -27,7 +27,7 @@ async def not_found_error_exception_handler(
 
 
 async def invalid_request_error_exception_handler(
-    request, exception: InvalidRequestError
+    request: web.Request, exception: InvalidRequestError
 ) -> web.Response:
     """
     Return response for InvalidRequest exception.

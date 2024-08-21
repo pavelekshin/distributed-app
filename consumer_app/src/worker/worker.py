@@ -42,7 +42,7 @@ async def process_message(msg: AbstractIncomingMessage) -> None:
             if row := await service.insert_message(url=link, data=data):
                 client = Client()
                 logger.info(f"Data saved: {row}")
-                await client.url_validation(code=row.get("code"))
+                await client.url_validation(code=row["code"])
                 await msg.ack()
             else:
                 await msg.reject(requeue=True)

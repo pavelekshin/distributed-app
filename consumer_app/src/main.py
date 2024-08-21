@@ -24,7 +24,7 @@ async def rabbitmq_connection() -> AsyncGenerator:
     await connection.close()
 
 
-async def run():
+async def run() -> None:
     logger.info("Starting workers")
     async with rabbitmq_connection():
         hostname = socket.gethostname()

@@ -1,6 +1,8 @@
 from asyncio.log import logger
+from typing import Any
 
 from aiohttp import web
+from aiohttp.typedefs import Handler
 
 from src.exception_handlers import (
     base_exception_handler,
@@ -24,7 +26,7 @@ async def init_app() -> web.Application:
     return app
 
 
-def create_error_middleware(overrides):
+def create_error_middleware(overrides: dict[str | int, Any]):  # type: ignore[no-untyped-def]
     """
     Custom middleware error handler
     :param overrides: dict with exception handlers
@@ -32,7 +34,7 @@ def create_error_middleware(overrides):
     """
 
     @web.middleware
-    async def error_middleware(request, handler):
+    async def error_middleware(request: web.Request, handler: Handler):  # type: ignore[no-untyped-def]
         try:
             return await handler(request)
         except web.HTTPException as ex:
@@ -51,7 +53,7 @@ def create_error_middleware(overrides):
     return error_middleware
 
 
-def setup_routes(app: web.Application):
+def setup_routes(app: web.Application) -> None:
     app.router.add_routes(
         [
             web.post("/{code}/validate", handle_code_validate),
@@ -60,7 +62,7 @@ def setup_routes(app: web.Application):
     )
 
 
-def setup_middlewares(app):
+def setup_middlewares(app: web.Application) -> None:
     error_middleware = create_error_middleware(
         {
             "NotFoundError": not_found_error_exception_handler,

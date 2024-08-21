@@ -73,7 +73,7 @@ async def producer(queue_name: str) -> None:
                 await asyncio.sleep(1)
 
 
-async def run():
+async def run() -> None:
     logger.info("Starting producer")
     async with rabbitmq_connection():
         await producer(settings.COMMON_QUEUE)

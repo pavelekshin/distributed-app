@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from typing import Any
 
 from pydantic import BaseModel, field_validator
 
@@ -20,7 +21,7 @@ class Message(BaseModel):
 
     @field_validator("data", mode="before")
     @classmethod
-    def parse_data(cls, value):
+    def parse_data(cls, value: str | dict) -> dict[str, Any]:
         if isinstance(value, str):
             return json.loads(value)
         return value

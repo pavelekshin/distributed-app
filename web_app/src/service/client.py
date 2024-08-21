@@ -5,7 +5,7 @@ import aiohttp
 logger = logging.getLogger(__name__)
 
 
-async def check_resource(url) -> bool:
+async def check_resource(url: str) -> bool:
     """
     HTTP client for checking provided http url
     :param url: http url

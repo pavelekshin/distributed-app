@@ -6,7 +6,7 @@ from src.app import init_app
 from src.settings import settings
 
 
-def run():
+def run() -> None:
     app = init_app()
     logging.basicConfig(
         level=logging.DEBUG,
