@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import socket
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
@@ -26,7 +27,8 @@ async def rabbitmq_connection() -> AsyncGenerator:
 async def run():
     logger.info("Starting workers")
     async with rabbitmq_connection():
-        await worker.worker(settings.COMMON_QUEUE, "Worker-1")
+        hostname = socket.gethostname()
+        await worker.worker(settings.COMMON_QUEUE, f"Worker-{hostname}")
     logger.info("Connection closed")
 
 

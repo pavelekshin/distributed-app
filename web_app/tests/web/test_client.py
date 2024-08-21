@@ -27,7 +27,7 @@ async def test_validate_not_found(client: TestClient) -> None:
 
 
 @pytest.mark.parametrize(
-    "is_allow_redirect, expected",
+    "is_allow, expected",
     [
         (False, 302),
         (True, 200),
@@ -36,7 +36,7 @@ async def test_validate_not_found(client: TestClient) -> None:
 async def test_validate_redirect(
     client: TestClient,
     monkeypatch: pytest.MonkeyPatch,
-    is_allow_redirect,
+    is_allow,
     expected,
 ) -> None:
     from src.routes import client as client_module
@@ -59,7 +59,5 @@ async def test_validate_redirect(
     monkeypatch.setattr(client_module, "check_resource", fake_validation)
     monkeypatch.setattr(service, "insert_message", fake_validation)
 
-    resp: ClientResponse = await client.post(
-        "/000/validate", allow_redirects=is_allow_redirect
-    )
+    resp: ClientResponse = await client.post("/000/validate", allow_redirects=is_allow)
     assert resp.status == expected

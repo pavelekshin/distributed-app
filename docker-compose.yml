@@ -27,6 +27,8 @@ services:
     volumes:
       - ./web_app:/src
     restart: on-failure
+    expose:
+      - 8000
     ports:
       - "16000:8000"
     depends_on:

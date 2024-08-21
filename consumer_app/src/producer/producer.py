@@ -7,6 +7,7 @@ from uuid import uuid4
 
 import aio_pika
 from aio_pika import DeliveryMode
+from aio_pika.abc import AbstractChannel  # noqa
 
 from src import rabbit
 from src.main import rabbitmq_connection
