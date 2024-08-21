@@ -25,7 +25,7 @@ async def data_generator(ids: int, job_id: str) -> list[dict[str, str | int]]:
         {
             "id": job_id,
             "ts": datetime.now().isoformat(),
-            # "link": "https://pypi.org/bcd123",
+            "link": "https://pypi.org/bcd123",
             "data": {
                 "acc_id": str(ids),
                 "unsubscribe": False,
