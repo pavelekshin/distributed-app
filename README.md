@@ -1,6 +1,7 @@
 # Distributed app with producer/consumer/aiohttp/rabbitmq/postgresql
-
-- well-structured easy to understand and scale-up project structure
+<br>
+<br>
+- well-structured easy to understand and scale-up project structure:
 
 ```bash
 .
@@ -81,7 +82,7 @@
 - easy local development
     - Dockerfile optimized for small size and fast builds with a non-root user
     - Docker-compose for easy deployment
-    - environment with configured Postgres and RabbitMQ
+    - environment with configured PostgreSQL and RabbitMQ
 - SQLAlchemy with slightly configured `alembic`
     - async SQLAlchemy engine
     - migrations set in easy to understand format (`YYYY-MM-DD_HHmm_rev_slug`)
