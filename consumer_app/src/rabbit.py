@@ -1,3 +1,3 @@
-from aio_pika.abc import AbstractRobustChannel
+from aio_pika.abc import AbstractChannel
 
-rabbit_client: AbstractRobustChannel = None  # type: ignore
+rabbit_client: AbstractChannel = None  # type: ignore

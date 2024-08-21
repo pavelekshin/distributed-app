@@ -10,11 +10,11 @@ from src.service import client, service
 logger = logging.getLogger(__name__)
 
 
-async def healthcheck(request: Request) -> web.json_response:
+async def healthcheck(request: Request) -> web.Response:
     return web.json_response(data={"status": "ok"})
 
 
-async def handle_code_validate(request: Request) -> web.json_response:
+async def handle_code_validate(request: Request) -> web.Response:
     """
     URL validation, receive code via http
     :param request: Request

@@ -8,7 +8,7 @@ from src.exceptions import (
 
 async def not_found_error_exception_handler(
     request, exception: NotFoundError
-) -> web.json_response:
+) -> web.Response:
     """
     Return response for NotFoundError exception.
     Used for error middleware.
@@ -28,7 +28,7 @@ async def not_found_error_exception_handler(
 
 async def invalid_request_error_exception_handler(
     request, exception: InvalidRequestError
-) -> web.json_response:
+) -> web.Response:
     """
     Return response for InvalidRequest exception.
     Used for error middleware.
@@ -48,7 +48,7 @@ async def invalid_request_error_exception_handler(
 
 async def base_exception_handler(
     status_code: int, exception: Exception
-) -> web.json_response:
+) -> web.Response:
     """
     Returns a Response for any unhandled exception.
     Used for error middleware.

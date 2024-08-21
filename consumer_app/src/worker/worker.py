@@ -4,7 +4,7 @@ import logging
 from json import JSONDecodeError
 
 import aio_pika  # noqa
-from aio_pika.abc import AbstractIncomingMessage, AbstractQueue, AbstractRobustChannel
+from aio_pika.abc import AbstractChannel, AbstractIncomingMessage, AbstractQueue
 from pydantic import ValidationError
 
 from src import rabbit
@@ -48,7 +48,7 @@ async def process_message(msg: AbstractIncomingMessage) -> None:
                 await msg.reject(requeue=True)
 
 
-async def initialize_dlx_exchange(channel: AbstractRobustChannel) -> None:
+async def initialize_dlx_exchange(channel: AbstractChannel) -> None:
     """
     Initialize DLX exchange and queue
     :param channel: channel
@@ -62,7 +62,7 @@ async def initialize_dlx_exchange(channel: AbstractRobustChannel) -> None:
 
 
 async def initialize_common_exchange(
-    channel: AbstractRobustChannel, queue_name: str
+    channel: AbstractChannel, queue_name: str
 ) -> AbstractQueue:
     """
     Initialize common exchange and queue
@@ -93,7 +93,7 @@ async def worker(queue_name: str, name: str) -> None:
     :param name: worker name
     :param queue_name: worker queue
     """
-    async with rabbit.rabbit_client as channel:  # type: AbstractRobustChannel
+    async with rabbit.rabbit_client as channel:  # type: AbstractChannel
         await channel.set_qos(prefetch_count=1)  # number of messages per worker
         await initialize_dlx_exchange(channel)
         queue = await initialize_common_exchange(channel, queue_name)

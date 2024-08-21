@@ -2,6 +2,7 @@ import asyncio
 import json
 import logging
 from datetime import datetime
+from typing import Any
 from uuid import uuid4
 
 import aio_pika
@@ -14,7 +15,7 @@ from src.settings import settings
 logger = logging.getLogger(__name__)
 
 
-async def data_generator(ids: int, job_id: str) -> list[dict[str, str | int]]:
+async def data_generator(ids: int, job_id: str) -> list[dict[str, Any]]:
     """
     Generates data
     :param ids: range
@@ -50,7 +51,7 @@ async def producer(queue_name: str) -> None:
     Puts all the requested work into the work queue.
     :param queue_name: producer queue
     """
-    async with rabbit.rabbit_client as channel:  # type: aio_pika.abc.AbstractRobustChannel
+    async with rabbit.rabbit_client as channel:  # type: AbstractChannel
         for i in range(10):
             job_id = str(uuid4())
             for data in await data_generator(i, job_id):
