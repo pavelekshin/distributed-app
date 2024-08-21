@@ -99,7 +99,7 @@
 
 ### Requirements:
 
-docker-compose v2 to support all syntax inside compose .yml
+docker-compose V2 to support all syntax inside compose .yml
 
 ### First Build Only
 
