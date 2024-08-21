@@ -127,6 +127,8 @@ docker compose exec app_web migrate
 docker compose exec app_web downgrade -1  # or -2 or base or hash of the migration
 ```
 
+### Generate data
+
 - Run producer to generate some data
 
 ```shell
