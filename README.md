@@ -129,7 +129,7 @@ docker compose exec app_web downgrade -1  # or -2 or base or hash of the migrati
 
 ### Generate data
 
-- Run producer to generate some data
+- Run producer to generate some data into the RabbitMQ queue
 
 ```shell
 docker compose exec app_consumer generatedata 
