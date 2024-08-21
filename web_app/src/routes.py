@@ -1,9 +1,7 @@
 import logging
 
 from aiohttp import web
-from aiohttp.web_exceptions import HTTPException
 from aiohttp.web_request import Request
-from pydantic import ValidationError
 
 from src.exceptions import NotFoundError
 from src.model import Message
