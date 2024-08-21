@@ -107,6 +107,7 @@ docker-compose V2 to support all syntax inside compose .yml
 1. `cp .env.example .env`
 2. `docker network create dev`
 3. `docker-compose up -d --build`
+4. `run db migrations via alembic`
 
 ### Migrations
 
