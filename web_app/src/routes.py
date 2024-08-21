@@ -26,12 +26,7 @@ async def handle_code_validate(request: Request) -> web.json_response:
     code = str(request.match_info["code"])
     if not (row := await service.get_row_by_code(code)):
         raise NotFoundError("Code not found")
-    try:
-        message = Message(**row)
-    except ValidationError as err:
-        logger.error(f"Error occurred: {err=}")
-        raise HTTPException(text=err) from err
-    else:
-        status = await client.check_resource(message.original_url)
-        await service.insert_message(code, message, status)
-        raise web.HTTPFound(message.original_url)
+    message = Message(**row)
+    status = await client.check_resource(message.original_url)
+    await service.insert_message(code, message, status)
+    raise web.HTTPFound(message.original_url)

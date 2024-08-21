@@ -31,11 +31,9 @@ async def process_message(msg: AbstractIncomingMessage) -> None:
         except JSONDecodeError as err:
             logger.error(f"Error occurred: {err=}")
             await msg.reject(requeue=False)
-            return
         except ValidationError as err:
             logger.error(f"Error occurred: {err=}")
             await msg.reject(requeue=False)
-            return
         else:
             if not (link := body.get("link")):
                 logger.error("Error occurred: 'link' not exists in received data")
@@ -48,7 +46,6 @@ async def process_message(msg: AbstractIncomingMessage) -> None:
                 await msg.ack()
             else:
                 await msg.reject(requeue=True)
-        return
 
 
 async def initialize_dlx_exchange(channel: AbstractRobustChannel) -> None:
@@ -65,7 +62,7 @@ async def initialize_dlx_exchange(channel: AbstractRobustChannel) -> None:
 
 
 async def initialize_common_exchange(
-    channel: AbstractRobustChannel, queue_name: str
+        channel: AbstractRobustChannel, queue_name: str
 ) -> AbstractQueue:
     """
     Initialize common exchange and queue
