@@ -8,7 +8,7 @@
 .
 ├── README.md
 ├── docker-compose.yml
-├── ruff.toml
+├── pyproject.toml
 ├── .env.example                                                        - env
 ├── requirements                                                        - requirements
 │   ├── base.txt
